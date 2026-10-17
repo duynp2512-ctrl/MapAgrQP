@@ -1,0 +1,14 @@
+.git
+.env
+.env.*
+!.env.example
+/data
+*.db
+*.sqlite*
+.venv
+__pycache__
+*.pyc
+*.log
+*.xlsx
+README*.md
+HUONG_DAN*.md

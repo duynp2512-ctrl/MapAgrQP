@@ -1,0 +1,11 @@
+FROM python:3.12-slim
+WORKDIR /app
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+COPY backend/ ./backend/
+COPY index.html ./index.html
+RUN mkdir -p /data
+ENV DATABASE_PATH=/data/agribank.db PRODUCTION=true PORT=8000
+EXPOSE 8000
+# Railway sets PORT dynamically. One worker only: SQLite + local DB.
+CMD ["sh", "-c", "exec python -m uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 1"]
